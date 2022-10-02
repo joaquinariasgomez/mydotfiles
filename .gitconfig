@@ -1,0 +1,29 @@
+[alias]
+	alias = config --get-regexp alias # List alias
+
+	s = status -sb # Status
+	a = add -v -A # Stage all files
+	ua = reset HEAD -- # Unstage all files
+	c = commit -m # Commit with message
+	diffc = diff --cached # Diff staged files
+
+	# List branches
+	b = "!git branch --format='%(HEAD) %(color:red)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative))\n   %(color:dim blue)%(authorname) %(authoremail)'"
+
+	# Track all remote branches
+	btrackall = "!f() { git branch -r | grep -v '\\->' | while read remote; do git branch --track ${remote#origin/} $remote ; done; }; f"
+
+	# Publish the local branch in the remote
+	bp = "!f() { u=${1:-origin}; ref=`git symbolic-ref HEAD`; read -p \"Push ${ref#refs/heads/} to $u? \" a && [ \"$a\" = \"y\" ] && git push -u $u $ref; }; f"
+
+	# Log all history
+	lg = "!git log --graph --pretty=format:'%C(green)[%C(yellow)%h%C(green)]%Creset - %s %C(dim green)(%cr) %C(red)%d \n %C(dim blue)%an <%ae> ' --abbrev-commit"
+
+	# Log today's history
+	lgtoday = "!git log --graph --pretty=format:'%C(green)[%C(yellow)%h%C(green)]%Creset - %s %C(dim green)(%cr) %C(red)%d \n %C(dim blue)%an <%ae> ' --abbrev-commit --since=yesterday"
+
+[color]
+	ui = true
+[user]
+	name = Joaquín Arias
+	email = joaquinariasgomezcal@gmail.com
